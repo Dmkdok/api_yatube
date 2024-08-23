@@ -1,6 +1,10 @@
+from rest_framework.serializers import (
+    ModelSerializer,
+    PrimaryKeyRelatedField,
+    SlugRelatedField,
+)
+
 from posts.models import Comment, Group, Post
-from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer, SlugRelatedField
 
 
 class PostSerializer(ModelSerializer):
@@ -20,7 +24,7 @@ class PostSerializer(ModelSerializer):
 
 class CommentSerializer(ModelSerializer):
     author = SlugRelatedField(slug_field='username', read_only=True)
-    post = serializers.PrimaryKeyRelatedField(read_only=True)
+    post = PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Comment
